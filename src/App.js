@@ -6,7 +6,8 @@ const CardContainer = () => {
     const [characters, setCharacters] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [searchVal, setSearchVal] = useState('');
+    const [searchVal, setSearchVal] = useState('');  
+const[status,setstatus]=useState("all"); 
 
     useEffect(() => {
         const fetchData = async () => {
@@ -30,17 +31,22 @@ const CardContainer = () => {
     const handleChange =  (e) => {
         setSearchVal(e.target.value);
       }
+      const statusChange  =  (e) => {
+        setstatus(e.target.value);
+      }  
 
     return (
         <div>
-            <Header handleChange={handleChange} searchVal={searchVal}/>
+            <Header handleChange={handleChange} searchVal={searchVal} statusChange={statusChange} statusVal={status}/>
             {isLoading ? (
                 <div>Loading...</div>
             ) : error ? (
                 <div>Error: {error.message}</div>
             ) : (
                 <div className="card-container">
-                    {characters.filter(item=>item?.name?.toLowerCase()?.includes(searchVal?.toLowerCase())).map(character => {
+                    {characters.filter(item=>item?.name?.toLowerCase()?.includes(searchVal?.toLowerCase())).filter(character =>
+        status=== "all" ? true : character.status === status
+      ).map(character => {
                        return <div key={character.id} className="card">
                             <img src={character.image} alt={character.name} />
                             <div className="card-body">

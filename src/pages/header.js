@@ -6,13 +6,8 @@ import Select from '@mui/material/Select';
 
 
 export default function Header(props) {
-const {handleChange, searchVal} = props;
-  
-  const[age,setage]=useState("All");
-  
-  const ageChange=(e)=>{
-    setage(e.target.value)
-  }
+const {handleChange, searchVal,statusChange,statusVal} = props;
+
 
   return (
     <>
@@ -23,10 +18,10 @@ const {handleChange, searchVal} = props;
        <FormControl style={{ minWidth: 120, marginLeft: "auto" }}>
  
   <Select
-    value={age}
-    onChange={ageChange}
+    value={statusVal}
+    onChange={statusChange}
   >
-    <MenuItem value={"All"}>All</MenuItem>
+    <MenuItem value={"all"}>All</MenuItem>
     <MenuItem value={"Alive"}>Alive</MenuItem>
     <MenuItem value={"Dead"}>Dead</MenuItem>
   </Select>
